@@ -104,6 +104,31 @@ GrantManager.prototype.obtainFromCode = function obtainFromCode (request, code, 
   return nodeify(fetch(this, handler, options, params), callback);
 };
 
+/**
+ * Obtain a grant from a previous interactive login which results in a code.
+ *
+ * obtainFromCode doesn't seem to work (payload is just not compatible with openid-connect). But I haven't just patched
+ * the original method, to keep backwards compatibility.
+ *
+ * @param {String} code The code from a successful login redirected from Keycloak.
+ * @param {String} redirectUri The original redirect uri the login was redirected to
+ * @param {Function} callback Optional callback, if not using promises.
+ */
+GrantManager.prototype.obtainFromAuthCode = function obtainFromAuthCode (code, redirectUri, callback) {
+  const params = {
+    code: code,
+    grant_type: 'authorization_code',
+    client_id: this.clientId,
+    client_secret: this.secret,
+    redirect_uri: redirectUri
+  };
+
+  const handler = createHandler(this);
+  const options = postOptions(this);
+
+  return nodeify(fetch(this, handler, options, params), callback);
+};
+
 GrantManager.prototype.checkPermissions = function obtainPermissions (authzRequest, request, callback) {
   const params = {
     grant_type: 'urn:ietf:params:oauth:grant-type:uma-ticket'
