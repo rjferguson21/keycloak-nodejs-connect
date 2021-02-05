@@ -114,7 +114,7 @@ Config.prototype.configure = function configure (config) {
 
   /**
    * If this is a public application or confidential.
-   * @type {String}
+   * @type {Boolean}
    */
   this.public = resolveValue(config['public-client'] || config.public || false);
 

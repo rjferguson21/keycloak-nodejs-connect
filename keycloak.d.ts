@@ -18,18 +18,18 @@ interface KeycloakConnectStatic {
 declare namespace KeycloakConnect {
 
   interface KeycloakConfig {
-    'auth-server-url': string
-    'realm': string
-    'clientId': string
-    'secret': string
-    'resource'?: string
-    'public-client'?: string
-    'realmUrl'?: string
-    'realmAdminUrl'?: string
-    'minTimeBetweenJwksRequests'?: number
-    'bearer-only'?: boolean
-    'plainKey'?: string
-    'verifyTokenAudience'?: boolean
+    authServerUrl: string
+    realm: string
+    clientId: string
+    secret: string
+    resource?: string
+    public?: string
+    realmUrl?: string
+    realmAdminUrl?: string
+    minTimeBetweenJwksRequests?: number
+    bearerOnly?: boolean
+    realmPublicKey?: string
+    verifyTokenAudience?: boolean
   }
 
   interface KeycloakOptions {
